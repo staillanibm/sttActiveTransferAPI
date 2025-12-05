@@ -1,0 +1,1419 @@
+{
+	"info": {
+		"_postman_id": "c299a3c9-e4f7-45a5-878c-319f181f9cf5",
+		"name": "webMethods MFT API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32883895"
+	},
+	"item": [
+		{
+			"name": "Configuration properties",
+			"item": [
+				{
+					"name": "Retrieve all properties",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"get\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.admin/manageProperties",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.admin",
+								"manageProperties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve specific properties",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"get\",\n    \"props\": [\n        {\n            \"name\": \"mft.gatewayServer.port\"\n        },\n        {\n            \"name\": \"mft.server.password.complexity\"\n        },\n        {\n            \"name\": \"mft.user.email.subject\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.admin/manageProperties",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.admin",
+								"manageProperties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update configuration property",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"set\",\n    \"props\": [\n        {\n            \"name\": \"mft.user.email.subject\",\n            \"value\": \"ActiveTransfer : enregistrement utilisateur\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.admin/manageProperties",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.admin",
+								"manageProperties"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assets movement",
+			"item": [
+				{
+					"name": "Export",
+					"item": [
+						{
+							"name": "Export all assets",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"all\": \"true\",\n    \"exportFileName\": \"/tmp/all_assets.xml\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoke/wm.mft.admin/exportData",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoke",
+										"wm.mft.admin",
+										"exportData"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export server config and preferences",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"all\": \"false\",\n    \"exportData\": [\n        {\n            \"assetType\": \"serverInstance\",\n            \"all\": \"true\"\n        },\n        {\n            \"assetType\": \"serverPreference\",\n            \"all\": \"true\"\n        }\n    ],\n    \"exportFileName\": \"/tmp/server.xml\",\n    \"includeDependencies\": \"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoke/wm.mft.admin/exportData",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoke",
+										"wm.mft.admin",
+										"exportData"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export all listeners (ports) and deps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"all\": \"false\",\n    \"exportData\": [\n        {\n            \"assetType\": \"port\",\n            \"all\": \"true\"\n        }\n    ],\n    \"exportFileName\": \"/tmp/listeners.xml\",\n    \"includeDependencies\": \"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoke/wm.mft.admin/exportData",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoke",
+										"wm.mft.admin",
+										"exportData"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export all partners",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"all\": \"false\",\n    \"exportData\": [\n        {\n            \"assetType\": \"partnerMapping\",\n            \"all\": \"true\"\n        }\n    ],\n    \"exportFileName\": \"/tmp/partners.xml\",\n    \"includeDependencies\": \"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoke/wm.mft.admin/exportData",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoke",
+										"wm.mft.admin",
+										"exportData"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export virtual folders and deps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"all\": \"false\",\n    \"exportData\": [\n        {\n            \"assetType\": \"VFS\",\n            \"all\": \"true\"\n        }\n    ],\n    \"exportFileName\": \"/tmp/virtual-folders.xml\",\n    \"includeDependencies\": \"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoke/wm.mft.admin/exportData",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoke",
+										"wm.mft.admin",
+										"exportData"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export post-processing action and deps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"all\": \"false\",\n    \"exportData\": [\n        {\n            \"assetType\": \"postProcessEvent\",\n            \"all\": \"false\",\n            \"names\": [\"Process files\"]\n        }\n    ],\n    \"exportFileName\": \"/tmp/post-processing-actions.xml\",\n    \"includeDependencies\": \"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoke/wm.mft.admin/exportData",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoke",
+										"wm.mft.admin",
+										"exportData"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Import",
+					"item": [
+						{
+							"name": "Import assets (with overwrite)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"force\": \"true\",\n    \"all\": \"true\",\n    \"importDataFileName\": \"/tmp/server.xml\",\n    \"includeDependencies\": \"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoke/wm.mft.admin/importData",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoke",
+										"wm.mft.admin",
+										"importData"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Import assets (without overwrite)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"force\": \"false\",\n    \"all\": \"true\",\n    \"importDataFileName\": \"/tmp/server.xml\",\n    \"includeDependencies\": \"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoke/wm.mft.admin/importData",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoke",
+										"wm.mft.admin",
+										"importData"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Import specific asset type (with overwrite)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"force\": \"true\",\n    \"all\": \"false\",\n    \"importData\": [\n        {\n            \"assetType\": \"serverInstance\",\n            \"all\": \"true\"\n        }\n    ],\n    \"importDataFileName\": \"/tmp/server.xml\",\n    \"includeDependencies\": \"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoke/wm.mft.admin/importData",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoke",
+										"wm.mft.admin",
+										"importData"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Import specific asset (with overwrite)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"force\": \"true\",\n    \"all\": \"false\",\n    \"importData\": [\n        {\n            \"assetType\": \"serverInstance\",\n            \"all\": \"false\",\n            \"names\": [\"Default Server Instance\"]\n        }\n    ],\n    \"importDataFileName\": \"/tmp/server.xml\",\n    \"includeDependencies\": \"true\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoke/wm.mft.admin/importData",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoke",
+										"wm.mft.admin",
+										"importData"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Certificate management",
+			"item": [
+				{
+					"name": "Create a new certificate (filesystem storage)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mftCertificate\": {\n        \"certificateId\": \"\",\n        \"certificateAlias\": \"sttlab_local_https_server_key\",\n        \"description\": \"Private key for HTTPS listener server certificate\",\n        \"location\": \"File\",\n        \"path\": \"/certs/mft-https.sttlab.local.p12\",\n        \"type\": \"Keystore\",\n        \"keyPassword\": \"changeit\",\n        \"keyStorePassword\": \"\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.certificate/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.certificate",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List the certificates",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.certificate/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.certificate",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a certificate by ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"certificateId\": \"55i2o300jbkv9no100000001\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.certificate/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.certificate",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a certificate by alias name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"certificateAlias\": \"sttlab_local_https_server_key\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.certificate/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.certificate",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a certificate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"mftCertificate\": {\n        \"certificateId\": \"55i2o300jbkv9no100000001\",\n        \"certificateAlias\": \"sttlab_local_https_server_key\",\n        \"description\": \"Private key for HTTPS listener server certificate\",\n        \"location\": \"File\",\n        \"path\": \"/certs/mft-https.sttlab.local-v2.p12\",\n        \"type\": \"Keystore\",\n        \"keyPassword\": \"changeit\",\n        \"keyStorePassword\": \"\"\n        }\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.certificate/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.certificate",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a certificate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"certificateId\": \"55i2o700jbku7kr40000000q\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.certificate/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.certificate",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Virtual Folder management",
+			"item": [
+				{
+					"name": "List all virtual folders",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.vfs/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.vfs",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a virtual folder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vfsName\": \"mft-bucket\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.vfs/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.vfs",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a root virtual folder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vfsDetails\": {\n        \"vfsName\": \"root-vf\",\n        \"vfsType\": \"Virtual\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.vfs/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.vfs",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a s3 sub-folder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parentVfsPath\": \"root-vf\",\n    \"vfsDetails\": {\n        \"vfsName\": \"s3-vf\",\n        \"vfsType\": \"Remote\",\n        \"vfsLocation\": {\n            \"remoteServerDetails\": {\n                \"protocol\": \"HOSTED-S3\",\n                \"url\": \"HOSTED-S3://\",\n                \"S3\": {\n                    \"bucketName\": \"mft\",\n                    \"endpoint\": \"http://minio:9000\",\n                    \"accessKeyId\": \"admin\",\n                    \"accessKey\": \"Password123@\",\n                    \"region\": \"\",\n                    \"folderPath\": \"\",\n                    \"s3URLStyle\": \"path\"\n                }, \n                \"proxy\": { \n                    \"isProxyEnabled\": \"false\", \n                    \"isCustomProxy\": \"false\" \n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.vfs/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.vfs",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a sftp sub-folder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parentVfsPath\": \"root-vf\",\n    \"vfsDetails\": {\n        \"vfsName\": \"sftp-vf\",\n        \"vfsType\": \"Remote\",\n        \"vfsLocation\": {\n            \"remoteServerDetails\": {\n                \"protocol\": \"SFTP\",\n                \"url\": \"SFTP://sftp/\", \n                \"user\": \"sftpuser\", \n                \"password\": \"\", \n                \"sftp\": { \n                    \"privateCertificateId\": \"55i2o500jbl62luj0000000q\", \n                    \"enableTwoFactorAuth\": \"false\"\n                }, \n                \"sshHostFingerprint\": \"SHA256:LwgUNBO3pvCp37vkhfHAltTuQ81NqVZRvtAOvEWhkRs\",\n                \"proxy\": { \n                    \"isProxyEnabled\": \"false\", \n                    \"isCustomProxy\": \"false\" \n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.vfs/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.vfs",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a s3 virtual folder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vfsDetails\": {\n        \"vfsId\": \"55i2o500jbl4nutr0000000m\", \n        \"vfsName\": \"s3-vf\",\n        \"vfsType\": \"Remote\",\n        \"vfsLocation\": {\n            \"remoteServerDetails\": {\n                \"protocol\": \"HOSTED-S3\",\n                \"url\": \"HOSTED-S3://\",\n                \"S3\": {\n                    \"bucketName\": \"mft2\",\n                    \"endpoint\": \"http://minio:9000\",\n                    \"accessKeyId\": \"admin\",\n                    \"accessKey\": \"Password123@\",\n                    \"region\": \"\",\n                    \"folderPath\": \"\",\n                    \"s3URLStyle\": \"path\"\n                }, \n                \"proxy\": { \n                    \"isProxyEnabled\": \"false\", \n                    \"isCustomProxy\": \"false\" \n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.vfs/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.vfs",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a sftp sub-folder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vfsDetails\": {\n        \"vfsId\": \"55i2o500jbl6v4q100000019\",\n        \"vfsName\": \"sftp-vf\",\n        \"vfsType\": \"Remote\",\n        \"vfsLocation\": {\n            \"remoteServerDetails\": {\n                \"protocol\": \"SFTP\",\n                \"url\": \"SFTP://sftp/fileshare\", \n                \"user\": \"sftpuser\", \n                \"password\": \"\", \n                \"sftp\": { \n                    \"privateCertificateId\": \"55i2o500jbl62luj0000000q\", \n                    \"enableTwoFactorAuth\": \"false\"\n                }, \n                \"sshHostFingerprint\": \"SHA256:LwgUNBO3pvCp37vkhfHAltTuQ81NqVZRvtAOvEWhkRs\",\n                \"proxy\": { \n                    \"isProxyEnabled\": \"false\", \n                    \"isCustomProxy\": \"false\" \n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.vfs/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.vfs",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a virtual folder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vfsId\": \"55i2o500jbl636cn0000000s\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.vfs/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.vfs",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Partner management",
+			"item": [
+				{
+					"name": "Create a partner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"partnerInfo\": {\n        \"name\": \"myPartner\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.partner/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.partner",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all partners",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.partner/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.partner",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a partner by ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"partnerId\": \"55i2o500jbl7pq4u0000001f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.partner/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.partner",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a partner by name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"partnerName\": \"myNewPartner\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.partner/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.partner",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a partner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"partnerId\": \"55i2o500jbl7pq4u0000001f\",\n    \"partnerName\": \"myNewPartner\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.partner/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.partner",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a partner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"partnerId\": \"55i2o500jbl7t7k00000001g\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.assets.partner/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.assets.partner",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Port management",
+			"item": []
+		},
+		{
+			"name": "PGP key management",
+			"item": [
+				{
+					"name": "Generate PGP key pair",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"privateKeyPath\": \"/certs\",\n    \"validityDays\": \"365\",\n    \"password\": \"changeit\",\n    \"confirmPassword\": \"changeit\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoke/wm.mft.security.pgp/generatePGPKeyFiles",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoke",
+								"wm.mft.security.pgp",
+								"generatePGPKeyFiles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{userName}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
